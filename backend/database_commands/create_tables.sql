@@ -9,13 +9,13 @@ CREATE TABLE documents (
 );
 
 -- creates chunks table, referencing document_id as a foreign key
-CREATE TABLE chunks (
-  id UUID PRIMARY KEY,
-  document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
-  chunk_index INTEGER NOT NULL,
-  content TEXT NOT NULL,
-  embedding vector(1536) NOT NULL
-);
+  CREATE TABLE chunks (
+    id UUID PRIMARY KEY,
+    document_id UUID NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+    chunk_index INTEGER NOT NULL,
+    content TEXT NOT NULL,
+    embedding vector(1024) NOT NULL
+  );
 
 -- creates an embedding index using the HNSW algorithm based on cosine similarity
 CREATE INDEX chunks_embedding_idx
