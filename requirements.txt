@@ -1,4 +1,8 @@
 fastapi[standard]
 typing
 pathlib
-langchain-text-splitter
+langchain-text-splitters
+sentence-transformers
+sqlalchemy
+psycopg2-binary
+python-dotenv
