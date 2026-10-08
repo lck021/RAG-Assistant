@@ -1,4 +1,5 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from sentence_transformers import SentenceTransformer
 
 def text_into_chunks(text: str) -> list[str]:
 
@@ -15,3 +16,13 @@ def text_into_chunks(text: str) -> list[str]:
     chunks = text_splitter.split_text(text)
 
     return chunks
+
+def embed_chunks(chunks: list[str]): 
+
+    # initialise the model
+    model = SentenceTransformer("BAAI/bge-large-en-v1.5")
+
+    # creating embeddings
+    embeddings = model.encode(chunks, truncate_dim=1024)
+
+    return embeddings
