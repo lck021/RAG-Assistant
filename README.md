@@ -8,3 +8,11 @@ docker run --name rag-postgres -e POSTGRES_USER=raguser -e POSTGRES_PASSWORD='ch
 ```
 
 A superuser account is initiated and a docker volume is mounted to the container so that the postgresql data is persistent. 
+
+## Setting up Virtual Environment (.venv)
+
+```terminal
+py -3.11 -m venv .venv
+
+.venv\Scripts\Activate.ps1
+```
