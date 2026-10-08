@@ -33,6 +33,8 @@ class Chunk(Base):
     content: Mapped[str] = mapped_column(Text)
     embedding: Mapped[list[float]] = mapped_column(VECTOR(1024))
 
+Base.metadata.create_all()
+
 def insert_document(filename: str, contents: str):
     document = Document(
         id=uuid.uuid4(),
@@ -45,3 +47,17 @@ def insert_document(filename: str, contents: str):
         session.commit()
 
     return document
+
+def insert_chunk(document_id: uuid.UUID, chunk_index: int, content: str, embedding: list[float]):
+    chunk = Chunk(
+        id=uuid.uuid4(),
+        chunk_index=chunk_index,
+        content=content,
+        embedding=embedding
+    )
+
+    with Session(engine) as session:
+        session.add(chunk)
+        session.commit()
+
+    return chunk
