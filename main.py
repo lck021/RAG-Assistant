@@ -3,7 +3,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from typing import Annotated
 
 from backend.database import *
-from rag import *
+from backend.rag import *
 
 app = FastAPI()
 
@@ -33,17 +33,17 @@ async def processFile(file: Annotated[UploadFile, File()]):
     embeddings = embed_chunks(chunks)
 
     # adds document and individual chunks into database
-    document = insert_document(filename=file.filename, 
+    document_id = insert_document(filename=file.filename, 
                                contents=contents)
 
-    for index, chunk in enumerate(chunks):
-        insert_chunk(document_id=document.id, 
-                     chunk_index=index, 
-                     content=chunk, 
-                     embedding=embeddings[index])
+    insert_chunks(
+        document_id=document_id,
+        chunks=chunks,
+        embeddings=embeddings
+    )
 
     return {
-        "id": document.id,
+        "id": document_id,
         "filename": file.filename,
         "chunk_count": chunk_count,
         "message": "Document uploaded successfully"
