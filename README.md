@@ -16,3 +16,8 @@ py -3.11 -m venv .venv
 
 .venv\Scripts\Activate.ps1
 ```
+
+## Running pytests
+```terminal
+python -m pytest tests/test_*.py
+```
