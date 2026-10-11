@@ -1,0 +1,21 @@
+Aurelia Robotics: Company Handbook (Test Document)
+ 
+About the company
+Aurelia Robotics was founded in 2017 in Lisbon, Portugal by Marta Sousa and Daniel Okafor. The company builds warehouse automation robots. Its headquarters moved to Porto in 2021. As of 2025, Aurelia employs 312 people across offices in Porto, Rotterdam, and Austin.
+ 
+Products
+The flagship product is the Kestrel-4, an autonomous pallet-moving robot released in March 2022. The Kestrel-4 can carry up to 850 kg and runs for 11 hours on a single charge. A full recharge takes 90 minutes. The Kestrel-4 navigates using lidar and a proprietary mapping system called TrailMap.
+ 
+The smaller Wren-2 was launched in September 2023. It is designed for picking light items such as books and clothing. The Wren-2 carries a maximum of 25 kg and has a battery life of 8 hours.
+ 
+Pricing
+The Kestrel-4 costs 48,000 euros per unit. The Wren-2 costs 21,500 euros per unit. Customers who order more than 20 units receive a 12 percent volume discount. Annual maintenance contracts cost 6 percent of the purchase price.
+ 
+Leave and working policy
+Full-time employees receive 25 days of paid annual leave. Employees can carry over a maximum of 5 unused days into the next year. Remote work is allowed up to 3 days per week. Every employee receives a yearly learning budget of 1,200 euros.
+ 
+Support
+Customer support is available Monday to Friday, 08:00 to 18:00 Central European Time. The support email is help@aurelia-robotics.example. Critical outages are handled by an on-call team that responds within 30 minutes, at any time of day.
+ 
+Safety
+All Aurelia robots stop automatically if a person comes within 1.5 metres. The company's safety certification is called AuraSafe, first awarded in 2022 and renewed every 2 years.
