@@ -1,7 +1,9 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 from functools import lru_cache
-from huggingface_hub import InferenceClient
+from google import genai
+
+client = genai.Client()
 
 # cache the embedding model
 @lru_cache(maxsize=1)
@@ -44,12 +46,9 @@ def embed_question(question: str):
 
 
 def generate_answer(question: str, context: list):
-    client = InferenceClient()
-
     context = "\n\n".join(chunk.content for chunk in context)
+    instructions = "Answer using only the context below. If the answer is not in the context, reply exactly: NOT_FOUND"
     prompt = f"""
-    Answer the question below using only the provided context.
-
     Context:
     {context}
 
@@ -57,18 +56,16 @@ def generate_answer(question: str, context: list):
     {question}
     """
 
-    completion = client.chat.completions.create(
-        model="openai/gpt-oss-120b",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a helpful assistant. Answer concisely.",
-            },
-            {
-                "role": "user",
-                "content": prompt,
-            }
-        ]
+    interaction = client.interactions.create(
+        model="gemini-3.8-flash",
+        system_instruction=instructions,
+        input=prompt,
+        generation_config={
+            "temperature": 0,
+            "max_output_tokens": 300,
+            "thinking_level": "low"
+        },
+        store=False
     )
 
-    return completion.choices[0].message
+    return interaction.output_text
