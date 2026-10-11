@@ -1,6 +1,7 @@
 from pathlib import Path
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from typing import Annotated
+from pydantic import BaseModel, Field
 
 from backend.database import *
 from backend.rag import *
@@ -48,3 +49,31 @@ async def processFile(file: Annotated[UploadFile, File()]):
         "chunk_count": chunk_count,
         "message": "Document uploaded successfully"
     }
+
+
+class AskRequest(BaseModel):
+    question: str = Field(min_length=1, max_length=500)
+
+
+@app.post("/ask", status_code=201)
+def generateAnswer(request: AskRequest):
+    request.question = request.question.strip()
+
+    q_embedding = embed_question(request.question)
+    similar_chunks = find_similar(q_embedding)
+    response = generate_answer(request.question, context=similar_chunks)
+
+    return {
+        "response": response,
+        "context": [
+            {
+                "id": chunk.id,
+                "content": chunk.content,
+                "document_id": chunk.document_id
+            }
+            for chunk in similar_chunks
+        ]
+    }
+
+
+# TODO: add a delete endpoint and delete the test doc after the tests have ran
