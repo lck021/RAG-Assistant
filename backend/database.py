@@ -4,7 +4,7 @@ import uuid
 from pgvector.sqlalchemy import VECTOR
 from datetime import datetime, timezone
 from dotenv import load_dotenv
-from sqlalchemy import DateTime, ForeignKey, create_engine, Text, select
+from sqlalchemy import DateTime, ForeignKey, create_engine, Text, select, delete
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 
 load_dotenv()
@@ -53,6 +53,31 @@ def insert_document(filename: str, contents: str):
         session.refresh(document)
         return document.id
 
+
+def is_doc_present(document_id: uuid.UUID) -> bool:
+    statement = (
+        select(Document)
+        .where(Document.id == document_id)
+    )
+
+    with Session(engine) as session:
+        result = session.scalars(statement).one_or_none()
+        if result is None:
+            return False
+        return True
+
+
+def delete_document(document_id: uuid.UUID):
+    statement = (
+        delete(Document)
+        .where(Document.id == document_id)
+    )
+
+    with Session(engine) as session:
+        result = session.execute(statement)
+        session.commit()
+
+    return result.rowcount > 0
 
 def insert_chunks(document_id: uuid.UUID, chunks: list[str], embeddings: list):
     with Session(engine) as session:
