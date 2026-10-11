@@ -9,3 +9,4 @@ python-dotenv
 uuid
 pgvector
 pytest
+huggingface_hub
