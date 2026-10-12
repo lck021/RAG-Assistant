@@ -10,3 +10,4 @@ uuid
 pgvector
 pytest
 google-genai
+uvicorn
