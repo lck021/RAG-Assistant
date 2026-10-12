@@ -26,7 +26,7 @@ client = TestClient(app)
 def uploaded_document():
     with open(TEST_FILE, "rb") as file:
         response = client.post(
-                    "/upload",
+                    "/api/upload",
                     files={"file": ("test.txt", file, "text/plain")}
                 )
     assert response.status_code == 201, response.text
@@ -38,7 +38,7 @@ def uploaded_document():
 
 def test_basic_response():
     response = client.post(
-        "/ask",
+        "/api/ask",
         json={"question": "What is this document about?"}
     )
 
@@ -52,7 +52,7 @@ def test_basic_response():
 @pytest.mark.parametrize("question, answer", CASES)
 def test_correct_response(question: str, answer: str):
     response = client.post(
-                "/ask",
+                "/api/ask",
                 json={"question": question}
             )
 
@@ -70,7 +70,7 @@ def test_correct_response(question: str, answer: str):
 @pytest.mark.parametrize("question", UNANSWERABLE)
 def test_refuses_unanswerable(question):
     response = client.post(
-                    "/ask",
+                    "/api/ask",
                     json={"question": question}
                 )
     
@@ -80,7 +80,7 @@ def test_refuses_unanswerable(question):
 
 def test_null_request():
     response = client.post(
-            "/ask",
+            "/api/ask",
             json={"question": None}
         )
     
@@ -89,7 +89,7 @@ def test_null_request():
 
 def test_empty_question():
     response = client.post(
-            "/ask",
+            "/api/ask",
             json={"question": ""}
         )
     
@@ -98,7 +98,7 @@ def test_empty_question():
 
 def test_invalid_type():
     response = client.post(
-                "/ask",
+                "/api/ask",
                 json={"question": 123}
             )
         

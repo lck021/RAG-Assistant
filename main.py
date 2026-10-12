@@ -9,7 +9,7 @@ from backend.rag import *
 
 app = FastAPI()
 
-@app.post("/upload", status_code=201)
+@app.post("/api/upload", status_code=201)
 async def processFile(file: Annotated[UploadFile, File()]):
 
     # checks if file type is valid
@@ -56,7 +56,7 @@ class AskRequest(BaseModel):
     question: str = Field(min_length=1, max_length=500)
 
 
-@app.post("/ask", status_code=200)
+@app.post("/api/ask", status_code=200)
 def generateAnswer(request: AskRequest):
     request.question = request.question.strip()
 
@@ -77,8 +77,7 @@ def generateAnswer(request: AskRequest):
     }
 
 
-# TODO: add a delete endpoint and delete the test doc after the tests have ran
-@app.delete("/delete/{document_id}")
+@app.delete("/api/delete/{document_id}")
 def deleteDocument(document_id: uuid.UUID):
     if not is_doc_present(document_id):
         raise HTTPException(

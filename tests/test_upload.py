@@ -11,7 +11,7 @@ def test_correct_upload(monkeypatch):
 
     file = BytesIO(b"Hello world!")
     response = client.post(
-        "/upload",
+        "/api/upload",
         files={"file": ("test.txt", file, "text/plain")}
     )
 
@@ -24,7 +24,7 @@ def test_correct_upload(monkeypatch):
 
 def test_incorrect_type():
     response = client.post(
-                "/upload",
+                "/api/upload",
                 files={"file": ("test.pdf", b"pdf file contents", "application/pdf")}
             )
 
