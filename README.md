@@ -6,9 +6,13 @@ I built this project to explore the engineering behind a document-grounded assis
 
 ## Demo
 
-**Suggested portfolio media:** Place a screenshot of the upload and Q&A interface here, followed by a short GIF or video of the full flow (upload → question → answer). An API response showing the retrieved `context` would also fit beside the architecture section below. Add the assets under `docs/` and link them here when available.
+![RAG Demo_Valid Question](demos\RAG_demo_valid.png)
 
-Try it locally with [`tests/test.txt`](tests/test.txt): upload the sample handbook, then ask **“How long does a Kestrel-4 run on one charge?”** The relevant passage says **11 hours**. Ask something the handbook does not cover, such as its stock price, to see the `NOT_FOUND` behavior.
+After uploading [`tests/test.txt`](tests/test.txt), the RAG Assistant answers **“How close can a person get before the robots stop?”** with **1.5 metres** which corresponds to the correct answer in the package.
+
+![RAG Demo_Invalid Question](demos\RAG_demo_invalid.png)
+
+Upon asking something the handbook does not cover, such as its stock price, the RAG Assistant answers with the default `NOT_FOUND` behavior.
 
 ## What it does
 
