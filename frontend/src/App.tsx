@@ -32,7 +32,6 @@ function App() {
     try {
       const data = await askQuestion(question);
       setAnswer(data.response);
-      setQuestion("");
     } catch (error) {
       setError(error instanceof Error ? error.message : "Something went wrong");
     } finally {
@@ -49,7 +48,7 @@ function App() {
     setUploadLoading(true);
     try {
       await uploadFile(file);
-      setSuccess(`${file} successfully uploaded`);
+      setSuccess(`${file.name} successfully uploaded`);
       setFile(null);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Something went wrong");
@@ -123,7 +122,7 @@ function App() {
       )}
 
       {/* input to upload files */}
-      <div className="card shadow-sm mb-4">
+      <div className="card shadow-sm mb-4 mt-4">
         <div className="card-body">
           <h2 className="h5 mb-3">Upload a document</h2>
           <form onSubmit={handleUpload}>
