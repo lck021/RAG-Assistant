@@ -6,11 +6,11 @@ I built this project to explore the engineering behind a document-grounded assis
 
 ## Demo
 
-![RAG Demo_Valid Question](demos\RAG_demo_valid.png)
+![RAG Demo_Valid Question](demos/RAG_demo_valid.png)
 
 After uploading [`tests/test.txt`](tests/test.txt), the RAG Assistant answers **“How close can a person get before the robots stop?”** with **1.5 metres** which corresponds to the correct answer in the package.
 
-![RAG Demo_Invalid Question](demos\RAG_demo_invalid.png)
+![RAG Demo_Invalid Question](demos/RAG_demo_invalid.png)
 
 Upon asking something the handbook does not cover, such as its stock price, the RAG Assistant answers with the default `NOT_FOUND` behavior.
 
